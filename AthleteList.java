@@ -29,11 +29,16 @@ public class AthleteList<T extends Athlete> implements AthleteListInterface<T> {
             throw new IllegalArgumentException("Element cannot be null");
         }
 
-        if (cur_elements < INITIAL_CAPACITY) {
+        if (cur_elements < INITIAL_CAPACITY ) {
             backingList[cur_elements] = t;
             cur_elements += 1;
-        } else {
-            //resize
+        } else if (cur_elements > backingList.length) {
+            Athlete newbacking[] = new Athlete[backingList.length * 2];
+            for(int i=0; i<backingList.length; i++){
+                backingList[i] = backingList[i];
+            }
+            this.backingList = backingList;
+            backingList[cur_elements] = t;
         }
     }
 
@@ -47,13 +52,24 @@ public class AthleteList<T extends Athlete> implements AthleteListInterface<T> {
      * list.size() would now return 3. The lists capacity would not change
      * though.
      * @throws IndexOutOfBoundsException if the index is less than zero or is
-     * greater than or equal to the number of elements in the AthleteList.
      * @param index Index of the element to be removed.
      * @return The Athlete removed from the AthleteList.
      */
     @Override
-    public T remove(int index) {
-        return null;
+    @SuppressWarnings("unchecked")
+    public T remove(int index) throws IndexOutOfBoundsException {
+        Athlete temp;
+        if (index < 0 || index >= cur_elements) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            temp = backingList[index];
+
+            for (int x=index; x<backingList.length - 1; x++) {
+                backingList[x] = backingList[x+1];
+            }
+        }
+        cur_elements--;
+        return (T) temp;
     }
 
     /**
@@ -64,8 +80,15 @@ public class AthleteList<T extends Athlete> implements AthleteListInterface<T> {
      * @return Athlete at the passed-in index
      */
     @Override
-    public T get(int index) {
-        return null;
+    @SuppressWarnings("unchecked")
+    public T get(int index) throws IndexOutOfBoundsException {
+        if (index < 0 || index >= cur_elements) {
+            throw new IndexOutOfBoundsException();
+        } else {
+
+            return (T) backingList[index];
+        }
+
     }
 
     /**
@@ -74,7 +97,8 @@ public class AthleteList<T extends Athlete> implements AthleteListInterface<T> {
      */
     @Override
     public void clear() {
-
+        backingList = new Athlete[INITIAL_CAPACITY];
+        cur_elements = 0;
     }
 
     /**
@@ -83,7 +107,7 @@ public class AthleteList<T extends Athlete> implements AthleteListInterface<T> {
      */
     @Override
     public int size() {
-        return 1;
+        return cur_elements;
     }
 
     /**
@@ -92,7 +116,11 @@ public class AthleteList<T extends Athlete> implements AthleteListInterface<T> {
      */
     @Override
     public boolean isEmpty() {
-        return true;
+        if (cur_elements == 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

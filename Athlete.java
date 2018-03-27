@@ -61,7 +61,7 @@ public class Athlete {
      * overtraining of an Athlete as such: if energy < strength,
      * throw an OvertrainedAthleteException.
      */
-    public void train() throws OvertrainedAthleteException{
+    public void train() throws OvertrainedAthleteException {
 
         if (energy < strength) {
             throw new OvertrainedAthleteException("Athlete is overtrained");
