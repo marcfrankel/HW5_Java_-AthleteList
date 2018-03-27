@@ -25,21 +25,33 @@ public class AthleteList<T extends Athlete> implements AthleteListInterface<T> {
      */
     @Override
     public void add(T t) throws IllegalArgumentException {
+
+
         if (t == null) {
             throw new IllegalArgumentException("Element cannot be null");
         }
 
         if (cur_elements < INITIAL_CAPACITY ) {
+            //System.out.println("Ran regular");
             backingList[cur_elements] = t;
             cur_elements += 1;
-        } else if (cur_elements > backingList.length) {
-            Athlete newbacking[] = new Athlete[backingList.length * 2];
-            for(int i=0; i<backingList.length; i++){
-                backingList[i] = backingList[i];
+        } else if (cur_elements >= backingList.length - 1) {
+
+            Athlete newbacking[] = new Athlete[(backingList.length * 2)];
+
+            for(int i=0; i < backingList.length; i++) {
+                newbacking[i] = backingList[i];
             }
-            this.backingList = backingList;
+
+            backingList = newbacking;
             backingList[cur_elements] = t;
+            cur_elements++;
+
+        } else {
+            backingList[cur_elements] = t;
+            cur_elements++;
         }
+
     }
 
     /**
