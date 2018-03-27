@@ -1,7 +1,7 @@
 /**
  * Interface for an AthleteList!
  *
- * @author CS1331 TAs
+ * @author CS1331 TAs mfrankel8
  * @version 14.4.2
  * @param <T> A subtype of Athlete
  */

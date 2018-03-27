@@ -1,6 +1,6 @@
 /**
  * Class to represent an Athlete.
- * @author CS1331 TAs
+ * @author CS1331 TAs mfrankel8
  * @version 13.3.1
  */
 public class Athlete {
@@ -61,9 +61,14 @@ public class Athlete {
      * overtraining of an Athlete as such: if energy < strength,
      * throw an OvertrainedAthleteException.
      */
-    public void train() {
-        energy -= strength;
-        strength++;
+    public void train() throws OvertrainedAthleteException{
+
+        if (energy < strength) {
+            throw new OvertrainedAthleteException("Athlete is overtrained");
+        } else {
+            energy -= strength;
+            strength++;
+        }
     }
 
     /**
