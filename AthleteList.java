@@ -147,12 +147,12 @@ public class AthleteList<T extends Athlete> implements AthleteListInterface<T> {
      * @param index Index of the Athlete to be trained.
      */
     @Override
-    public void train(int index) throws IndexOutOfBoundsException {
+    public void train(int index) {
         if (index < 0 || index >= curElements) {
             throw new IndexOutOfBoundsException();
-        } else {
-            // backingList[index].train();
         }
+        backingList[index].train();
+
     }
 
     /**
