@@ -46,5 +46,7 @@ public class tester {
         Athlete temp2 = test_list.get(8);
         System.out.println(temp2.toString());
 
+        System.out.print(test_list.asArray());
+
      }
 }
